@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using TonsOfDamage.Data;
-using TonsOfDamage.Models;
+using Models;
 using TonsOfDamage.Services;
+using Repository;
 
 namespace TonsOfDamage
 {
@@ -29,11 +29,22 @@ namespace TonsOfDamage
             services.AddTransient<IUserStore<User>, UserRepository>();
             services.AddTransient<IRoleStore<Role>, RoleRepository>();
 
-            services.AddIdentity<User, Role>()
+            services.AddIdentity<User, Role>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+            })
                 .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
+                options.Cookie.Name = "Authentication";
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddMvc();
         }

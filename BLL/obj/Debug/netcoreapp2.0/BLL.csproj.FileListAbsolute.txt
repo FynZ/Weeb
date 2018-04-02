@@ -1,0 +1,8 @@
+C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\BLL\bin\Debug\netcoreapp2.0\BLL.deps.json
+C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\BLL\bin\Debug\netcoreapp2.0\BLL.dll
+C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\BLL\bin\Debug\netcoreapp2.0\BLL.pdb
+C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\BLL\obj\Debug\netcoreapp2.0\BLL.csproj.CoreCompileInputs.cache
+C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\BLL\obj\Debug\netcoreapp2.0\BLL.AssemblyInfoInputs.cache
+C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\BLL\obj\Debug\netcoreapp2.0\BLL.AssemblyInfo.cs
+C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\BLL\obj\Debug\netcoreapp2.0\BLL.dll
+C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\BLL\obj\Debug\netcoreapp2.0\BLL.pdb

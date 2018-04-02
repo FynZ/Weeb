@@ -1,5 +1,8 @@
 ﻿@using TonsOfDamage.Views.Manage
-@inject SignInManager<ApplicationUser> SignInManager
+@using Models;
+@using Models.ManageViewModels;
+
+@inject SignInManager<User> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

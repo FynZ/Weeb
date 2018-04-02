@@ -10,8 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using TonsOfDamage.Models;
-using TonsOfDamage.Models.AccountViewModels;
+using Models;
+using Models.AccountViewModels;
 using TonsOfDamage.Services;
 
 namespace TonsOfDamage.Controllers
@@ -40,6 +40,7 @@ namespace TonsOfDamage.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
 
+        #region Login
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
@@ -196,6 +197,7 @@ namespace TonsOfDamage.Controllers
                 return View();
             }
         }
+        #endregion Login
 
         [HttpGet]
         [AllowAnonymous]
@@ -204,6 +206,7 @@ namespace TonsOfDamage.Controllers
             return View();
         }
 
+        #region Register
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
@@ -220,18 +223,18 @@ namespace TonsOfDamage.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email };
+                var user = new User { UserName = model.Name, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id.ToString(), code, Request.Scheme);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    //_logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
@@ -240,6 +243,7 @@ namespace TonsOfDamage.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        #endregion Register
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -250,6 +254,7 @@ namespace TonsOfDamage.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
+        #region External
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -328,6 +333,7 @@ namespace TonsOfDamage.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View(nameof(ExternalLogin), model);
         }
+        #endregion External
 
         [HttpGet]
         [AllowAnonymous]
