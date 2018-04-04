@@ -123,7 +123,7 @@ namespace Repository
 
         public Task<string> GetUserNameAsync(User user, CancellationToken cancellationToken)
         {
-            return Task.FromResult(user.UserName);
+            return Task.FromResult(user.NormalizedEmail);
         }
 
         public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken cancellationToken)
