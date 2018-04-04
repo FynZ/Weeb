@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
@@ -16,6 +17,7 @@ namespace TonsOfDamage.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -23,6 +25,7 @@ namespace TonsOfDamage.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Guest")]
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

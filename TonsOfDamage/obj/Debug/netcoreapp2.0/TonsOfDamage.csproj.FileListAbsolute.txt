@@ -1,5 +1,6 @@
 C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOfDamage\obj\Debug\netcoreapp2.0\TonsOfDamage.csprojResolveAssemblyReference.cache
 C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOfDamage\obj\Debug\netcoreapp2.0\TonsOfDamage.csproj.CoreCompileInputs.cache
+C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOfDamage\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
 C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOfDamage\obj\Debug\netcoreapp2.0\TonsOfDamage.AssemblyInfoInputs.cache
 C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOfDamage\obj\Debug\netcoreapp2.0\TonsOfDamage.AssemblyInfo.cs
 C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOfDamage\bin\Debug\netcoreapp2.0\TonsOfDamage.deps.json
@@ -13,4 +14,3 @@ C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOf
 C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOfDamage\bin\Debug\netcoreapp2.0\Models.pdb
 C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOfDamage\obj\Debug\netcoreapp2.0\TonsOfDamage.dll
 C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOfDamage\obj\Debug\netcoreapp2.0\TonsOfDamage.pdb
-C:\Users\FynZ\OneDrive\Documents\Visual Studio 2017\Projects\TonsOfDamage\TonsOfDamage\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs

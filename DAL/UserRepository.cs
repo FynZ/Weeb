@@ -13,7 +13,7 @@ using Models;
 namespace Repository
 {
     public class UserRepository : IUserStore<User>, IUserEmailStore<User>, IUserPhoneNumberStore<User>,
-    IUserTwoFactorStore<User>, IUserPasswordStore<User>
+    IUserTwoFactorStore<User>, IUserPasswordStore<User>, IUserRoleStore<User>
     {
         private readonly string _connectionString;
 
@@ -98,10 +98,16 @@ namespace Repository
             using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync(cancellationToken);
-                return await connection.QuerySingleOrDefaultAsync<User>($@"
+                var user = await connection.QuerySingleOrDefaultAsync<User>($@"
                 SELECT * 
                 FROM tod.t_users
                 WHERE NormalizedEmail = @{nameof(normalizedUserName)}", new { normalizedUserName });
+                user.Roles = (await connection.QueryAsync<Role>($@"
+                SELECT TR.Id, TR.Name, TR.NormalizedName 
+                FROM tod.t_roles as TR 
+                INNER JOIN tod.t_userroles AS TUR ON TR.Id = TUR.RoleId 
+                WHERE TUR.UserId = @{nameof(user.Id)}", new { user.Id })).ToList();
+                return user;
             }
         }
 
@@ -255,6 +261,36 @@ namespace Repository
         public void Dispose()
         {
             // Nothing to dispose.
+        }
+
+        public Task AddToRoleAsync(User user, string roleName, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveFromRoleAsync(User user, string roleName, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<string>> GetRolesAsync(User user, CancellationToken cancellationToken)
+        {
+            if (user.Roles.Count == 0)
+            {
+                IList<string> list = new List<string>();
+                //return list;
+            }
+            return Task.FromResult<IList<string>>(user.Roles.Select(x => x.Name).ToList());
+        }
+
+        public Task<bool> IsInRoleAsync(User user, string roleName, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.Roles.Any(x => x.Name == roleName));
+        }
+
+        public Task<IList<User>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

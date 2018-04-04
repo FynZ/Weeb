@@ -26,5 +26,7 @@ namespace Models
         public bool PhoneNumberConfirmed { get; set; }
 
         public bool TwoFactorEnabled { get; set; }
+
+        public List<Role> Roles { get; set; }
     }
 }
