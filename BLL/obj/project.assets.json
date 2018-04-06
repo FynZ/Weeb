@@ -665,32 +665,33 @@
   },
   "packageFolders": {
     "C:\\Users\\FynZ\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
-      "projectUniqueName": "C:\\Users\\FynZ\\OneDrive\\Documents\\Visual Studio 2017\\Projects\\TonsOfDamage\\BLL\\BLL.csproj",
+      "projectUniqueName": "C:\\Users\\FynZ\\Documents\\TonsOfDamage\\BLL\\BLL.csproj",
       "projectName": "BLL",
-      "projectPath": "C:\\Users\\FynZ\\OneDrive\\Documents\\Visual Studio 2017\\Projects\\TonsOfDamage\\BLL\\BLL.csproj",
+      "projectPath": "C:\\Users\\FynZ\\Documents\\TonsOfDamage\\BLL\\BLL.csproj",
       "packagesPath": "C:\\Users\\FynZ\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\FynZ\\OneDrive\\Documents\\Visual Studio 2017\\Projects\\TonsOfDamage\\BLL\\obj\\",
+      "outputPath": "C:\\Users\\FynZ\\Documents\\TonsOfDamage\\BLL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\FynZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Users\\FynZ\\source\\repos\\MemeGenerator\\NuGet": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

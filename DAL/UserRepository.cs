@@ -57,6 +57,7 @@ namespace Repository
                 SELECT id
                 FROM tod.t_users
                 WHERE UserName = @{nameof(User.UserName)}", user);
+                await AddToRoleAsync(user, "Guest", cancellationToken);
             }
 
             return IdentityResult.Success;
@@ -102,11 +103,15 @@ namespace Repository
                 SELECT * 
                 FROM tod.t_users
                 WHERE NormalizedEmail = @{nameof(normalizedUserName)}", new { normalizedUserName });
-                user.Roles = (await connection.QueryAsync<Role>($@"
-                SELECT TR.Id, TR.Name, TR.NormalizedName 
-                FROM tod.t_roles as TR 
-                INNER JOIN tod.t_userroles AS TUR ON TR.Id = TUR.RoleId 
-                WHERE TUR.UserId = @{nameof(user.Id)}", new { user.Id })).ToList();
+                if (user != null)
+                {
+                    user.Roles = (await connection.QueryAsync<Role>($@"
+                    SELECT TR.Id, TR.Name, TR.NormalizedName 
+                    FROM tod.t_roles as TR 
+                    INNER JOIN tod.t_userroles AS TUR ON TR.Id = TUR.RoleId 
+                    WHERE TUR.UserId = @{nameof(user.Id)}", new { user.Id })).ToList();
+                }
+
                 return user;
             }
         }
@@ -123,7 +128,7 @@ namespace Repository
 
         public Task<string> GetUserNameAsync(User user, CancellationToken cancellationToken)
         {
-            return Task.FromResult(user.NormalizedEmail);
+            return Task.FromResult(user.Email);
         }
 
         public Task SetNormalizedUserNameAsync(User user, string normalizedName, CancellationToken cancellationToken)
@@ -265,7 +270,25 @@ namespace Repository
 
         public Task AddToRoleAsync(User user, string roleName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            Role role = RoleRepository.Roles.Where(x => x.Name == roleName).First();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.OpenAsync(cancellationToken);
+                connection.ExecuteAsync($@"
+                INSERT INTO tod.t_userroles 
+                (
+                    UserId,
+                    RoleId
+                )
+                VALUES 
+                (
+                    @UserId,
+                    @RoleId
+                );", new { UserId = user.Id, RoleId = role.Id });
+            }
+
+            return Task.FromResult(0);
         }
 
         public Task RemoveFromRoleAsync(User user, string roleName, CancellationToken cancellationToken)
@@ -275,11 +298,6 @@ namespace Repository
 
         public Task<IList<string>> GetRolesAsync(User user, CancellationToken cancellationToken)
         {
-            if (user.Roles.Count == 0)
-            {
-                IList<string> list = new List<string>();
-                //return list;
-            }
             return Task.FromResult<IList<string>>(user.Roles.Select(x => x.Name).ToList());
         }
 

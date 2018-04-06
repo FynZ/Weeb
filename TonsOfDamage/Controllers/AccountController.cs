@@ -235,13 +235,20 @@ namespace TonsOfDamage.Controllers
 
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     //_logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction(nameof(AccountController.RegisterConfirmation), "Account");
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult RegisterConfirmation()
+        {
+            return View();
         }
         #endregion Register
 

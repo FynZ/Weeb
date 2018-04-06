@@ -41,6 +41,7 @@ namespace TonsOfDamage.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Guest")]
         public IActionResult Apply()
         {
             var user = _userManager.FindByNameAsync(User.Identity.Name).Result;

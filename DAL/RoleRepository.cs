@@ -8,23 +8,35 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Models;
+using MySql.Data.MySqlClient;
 
 namespace Repository
 {
     public class RoleRepository : IRoleStore<Role>
     {
+        public static IEnumerable<Role> Roles { get; private set; }
+
         private readonly string _connectionString;
 
         public RoleRepository(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
+            Roles = GetAllRoles();
+        }
+
+        private IEnumerable<Role> GetAllRoles()
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                return connection.Query<Role>("SELECT * FROM tod.t_roles").ToList();
+            }
         }
 
         public async Task<IdentityResult> CreateAsync(Role role, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync(cancellationToken);
                 role.Id = await connection.QuerySingleAsync<int>($@"
@@ -48,7 +60,7 @@ namespace Repository
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync(cancellationToken);
                 await connection.ExecuteAsync($@"
@@ -66,7 +78,7 @@ namespace Repository
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync(cancellationToken);
                 await connection.ExecuteAsync($@"
@@ -109,7 +121,7 @@ namespace Repository
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync(cancellationToken);
                 return await connection.QuerySingleOrDefaultAsync<Role>($@"
@@ -123,7 +135,7 @@ namespace Repository
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync(cancellationToken);
                 return await connection.QuerySingleOrDefaultAsync<Role>($@"
